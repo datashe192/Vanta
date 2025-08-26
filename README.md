@@ -1,5 +1,5 @@
 # Vanta
-Vanta is a tiny toy programming language implemented in Python. It supports
+Vanta is a programming language implemented in Python. It supports
 variables, basic arithmetic, and printing.
 
 ## Running a program

@@ -7,16 +7,17 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #0a0a0a;
-  color: #00ff9d;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  color: white;
   display: flex;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .sidebar {
-  width: 220px;
-  background: #111;
+  width: 200px;
+  background: #1a1a2e;
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -26,16 +27,18 @@ body {
 .sidebar button {
   background: none;
   border: none;
-  color: #00ff9d;
-  text-align: left;
+  color: #d0d0d0;
   padding: 10px 0;
-  cursor: pointer;
+  text-align: left;
   font-size: 1rem;
-  transition: color 0.3s;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
 }
 
-.sidebar button.active, .sidebar button:hover {
-  color: #fff;
+.sidebar button:hover, .sidebar button.active {
+  background: #6a5acd;
+  color: white;
 }
 
 .main-content {
@@ -54,20 +57,21 @@ body {
 }
 
 .code-box {
-  background: #111;
-  border: 1px solid #00ff9d;
+  background: #1e1e3f;
+  border: 1px solid #6a5acd;
   border-radius: 12px;
   padding: 10px;
   margin: 15px 0;
   position: relative;
   font-family: monospace;
   white-space: pre-wrap;
+  color: #00ff9d;
+  box-shadow: 0 0 12px #6a5acd55;
   transition: all 0.3s ease;
-  box-shadow: 0 0 10px #00ff9d55;
 }
 
 .code-box:hover {
-  box-shadow: 0 0 20px #00ff9daa;
+  box-shadow: 0 0 25px #6a5acd88;
 }
 
 .copy-btn {
@@ -80,11 +84,11 @@ body {
   padding: 2px 6px;
   cursor: pointer;
   font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 4px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
 }
 
 .copy-btn.copied {
@@ -104,17 +108,32 @@ body {
 .caption {
   margin-top: 8px;
   font-style: italic;
-  color: #55ff99;
+  color: #d0d0d0;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* Fade in animation */
+.container, .tab-content {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 <body>
-
 <div class="sidebar">
   <button class="active" data-tab="install">Installation</button>
   <button data-tab="setup">Setup</button>
   <button data-tab="variables">Variables</button>
-  <button onclick="window.location.href='index.html'">Back to Home</button>
+  <button onclick="location.href='index.html'">Back to Home</button>
 </div>
 
 <div class="main-content">
@@ -162,16 +181,14 @@ print(a, b)
 // Tab switching
 const buttons = document.querySelectorAll('.sidebar button[data-tab]');
 const tabs = document.querySelectorAll('.tab-content');
-
 buttons.forEach(btn => {
   btn.addEventListener('click', () => {
     buttons.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    tabs.forEach(tab => {
-      tab.classList.remove('active');
-      if(tab.id === btn.dataset.tab) tab.classList.add('active');
-    });
+    tabs.forEach(tab => tab.classList.remove('active'));
+    const target = document.getElementById(btn.dataset.tab);
+    target.classList.add('active');
   });
 });
 
@@ -196,9 +213,7 @@ function addCopyButtons() {
     }
   });
 }
-
 addCopyButtons();
 </script>
-
 </body>
 </html>

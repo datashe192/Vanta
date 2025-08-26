@@ -13,31 +13,37 @@
       padding: 40px;
       line-height: 1.6;
       text-align: left;
+      overflow-x: hidden;
     }
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 25px;
       color: #7b68ee;
       animation: fadeIn 1.2s ease;
     }
+
     h2 {
       margin-top: 30px;
       color: #7b68ee;
     }
+
     .code-container {
       position: relative;
       margin-bottom: 25px;
       animation: fadeIn 1.5s ease;
     }
+
     pre {
       background: #1e1e1e;
       padding: 16px;
       border-radius: 10px;
-      color: #00ff9d;
+      color: #00ff9d; /* green same as loader/code boxes */
       font-family: "Consolas", monospace;
       overflow-x: auto;
       margin: 0;
     }
+
     .copy-btn {
       position: absolute;
       top: 10px;
@@ -49,9 +55,11 @@
       font-size: 1.2rem;
       transition: 0.3s;
     }
+
     .copy-btn:hover {
       color: #9a82ff;
     }
+
     a {
       display: inline-block;
       margin-top: 20px;
@@ -60,16 +68,34 @@
       font-weight: bold;
       transition: 0.3s;
     }
+
     a:hover {
       color: #9a82ff;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom top progress bar */
+    #custom-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background-color: #00ff9d; /* same green as code boxes */
+      z-index: 9999;
+      transition: width 0.3s ease;
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Top loader -->
+  <div id="custom-loader"></div>
+
   <h1>About Vanta</h1>
 
   <h2>Installing Vanta</h2>
@@ -105,15 +131,32 @@
   <a href="index.html">⬅ Back to Home</a>
 
   <script>
+    // Copy button functionality
     function copyCode(button) {
       const code = button.previousElementSibling.innerText;
       navigator.clipboard.writeText(code).then(() => {
         button.innerText = '✔️';
-        setTimeout(() => {
-          button.innerText = '📋';
-        }, 2500);
+        setTimeout(() => { button.innerText = '📋'; }, 2500);
       });
     }
+
+    // Initialize history state for back button
+    history.pushState(null, document.title, location.href);
+
+    // Detect browser back button
+    window.addEventListener('popstate', function(event) {
+      const loader = document.getElementById('custom-loader');
+      loader.style.width = '0%';
+      loader.style.display = 'block';
+
+      // Animate loader to 100%
+      setTimeout(() => { loader.style.width = '100%'; }, 50);
+
+      // Delay actual navigation so loader is visible
+      setTimeout(() => {
+        history.back();
+      }, 1000); // 1 second simulated load
+    });
   </script>
 </body>
 </html>

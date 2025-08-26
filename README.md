@@ -45,5 +45,21 @@ Output:
 
 ```
 1
-3
+```
+
+## About Vanta Installation:
+release will be coded soon
+```bash
+Vanta self-install
+```
+## or
+```bash
+./Vanta.exe self-install
+```
+
+## if it doesnt work then try doing this it might help:
+```bash
+cd path\to\vanta
+
+Vanta self-install
 ```

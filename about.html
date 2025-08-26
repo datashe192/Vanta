@@ -1,162 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Vanta</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #121212;
-      color: #f0f0f0;
-      padding: 40px;
-      line-height: 1.6;
-      text-align: left;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Vanta</title>
+<style>
+/* ===== CSS ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #00ff9d;
+  display: flex;
+  height: 100vh;
+}
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 25px;
-      color: #7b68ee;
-      animation: fadeIn 1.2s ease;
-    }
+.sidebar {
+  width: 220px;
+  background: #111;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-    h2 {
-      margin-top: 30px;
-      color: #7b68ee;
-    }
+.sidebar button {
+  background: none;
+  border: none;
+  color: #00ff9d;
+  text-align: left;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
 
-    .code-container {
-      position: relative;
-      margin-bottom: 25px;
-      animation: fadeIn 1.5s ease;
-    }
+.sidebar button.active, .sidebar button:hover {
+  color: #fff;
+}
 
-    pre {
-      background: #1e1e1e;
-      padding: 16px;
-      border-radius: 10px;
-      color: #00ff9d; /* green same as loader/code boxes */
-      font-family: "Consolas", monospace;
-      overflow-x: auto;
-      margin: 0;
-    }
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
 
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: #7b68ee;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: 0.3s;
-    }
+.tab-content {
+  display: none;
+}
 
-    .copy-btn:hover {
-      color: #9a82ff;
-    }
+.tab-content.active {
+  display: block;
+}
 
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      color: #7b68ee;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+.code-box {
+  background: #111;
+  border: 1px solid #00ff9d;
+  padding: 10px;
+  margin: 10px 0;
+  position: relative;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
 
-    a:hover {
-      color: #9a82ff;
-    }
+.copy-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: #222;
+  border: 1px solid #00ff9d;
+  color: #00ff9d;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.copy-btn.copied {
+  background: #00ff9d;
+  color: #000;
+}
 
-    /* Custom top progress bar */
-    #custom-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 4px;
-      background-color: #00ff9d; /* same green as code boxes */
-      z-index: 9999;
-      transition: width 0.3s ease;
-      display: none;
-    }
-  </style>
+.locked {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-style: italic;
+  margin: 10px 0;
+}
+.locked::before { content: '🔒'; }
+</style>
 </head>
 <body>
-  <!-- Top loader -->
-  <div id="custom-loader"></div>
 
-  <h1>About Vanta</h1>
+<div class="sidebar">
+  <button class="active" data-tab="install">Installation</button>
+  <button data-tab="setup">Setup</button>
+  <button data-tab="variables">Variables</button>
+</div>
 
-  <h2>Installing Vanta</h2>
-  <div class="code-container">
-    <pre><code>Vanta self-install</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋</button>
+<div class="main-content">
+  <!-- Installation Tab -->
+  <div id="install" class="tab-content active">
+    <h2>Installing Vanta</h2>
+    <div class="code-box">Vanta self-install</div>
+    <div class="code-box">./vanta.exe self-install</div>
+    <div class="code-box">Vanta init</div>
+    <div class="code-box">./Vanta.exe init</div>
+    <div class="code-box">cd path\to\vanta</div>
   </div>
 
-  <h2>If it doesn’t work, try this:</h2>
-  <div class="code-container">
-    <pre><code>./vanta.exe self-install</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋</button>
+  <!-- Setup Tab -->
+  <div id="setup" class="tab-content">
+    <h2>Setup</h2>
+    <div class="locked">Vanta not released yet</div>
+    <div class="code-box"># Setup instructions will appear here once Vanta is released</div>
   </div>
 
-  <h2>2. Implementing Vanta</h2>
-  <div class="code-container">
-    <pre><code>Vanta init</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋</button>
+  <!-- Variables Tab -->
+  <div id="variables" class="tab-content">
+    <h2>Variables</h2>
+    <p>Learn how to use variables in Vanta:</p>
+    <div class="code-box">
+a = b
+b = a
+ab = a, b
+print(ab)
+    </div>
+    <div class="code-box">
+a = a, b
+b = b, a
+print(a, b)
+    </div>
   </div>
+</div>
 
-  <h2>If it doesn’t work, try this:</h2>
-  <div class="code-container">
-    <pre><code>./Vanta.exe init</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋</button>
-  </div>
+<script>
+// ===== JS =====
 
-  <h2>If all above don’t work, try this:</h2>
-  <div class="code-container">
-    <pre><code>cd path\to\vanta</code></pre>
-    <button class="copy-btn" onclick="copyCode(this)">📋</button>
-  </div>
+// Tab switching
+const buttons = document.querySelectorAll('.sidebar button');
+const tabs = document.querySelectorAll('.tab-content');
 
-  <a href="index.html">⬅ Back to Home</a>
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-  <script>
-    // Copy button functionality
-    function copyCode(button) {
-      const code = button.previousElementSibling.innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        button.innerText = '✔️';
-        setTimeout(() => { button.innerText = '📋'; }, 2500);
-      });
-    }
-
-    // Initialize history state for back button
-    history.pushState(null, document.title, location.href);
-
-    // Detect browser back button
-    window.addEventListener('popstate', function(event) {
-      const loader = document.getElementById('custom-loader');
-      loader.style.width = '0%';
-      loader.style.display = 'block';
-
-      // Animate loader to 100%
-      setTimeout(() => { loader.style.width = '100%'; }, 50);
-
-      // Delay actual navigation so loader is visible
-      setTimeout(() => {
-        history.back();
-      }, 1000); // 1 second simulated load
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+      if(tab.id === btn.dataset.tab) tab.classList.add('active');
     });
-  </script>
+  });
+});
+
+// Copy button functionality
+function addCopyButtons() {
+  const codeBoxes = document.querySelectorAll('.code-box');
+  codeBoxes.forEach(box => {
+    if(!box.querySelector('.copy-btn')) {
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.innerHTML = '📋';
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(box.textContent.trim());
+        btn.innerHTML = '✔';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '📋';
+          btn.classList.remove('copied');
+        }, 2500);
+      });
+      box.appendChild(btn);
+    }
+  });
+}
+
+addCopyButtons();
+</script>
+
 </body>
 </html>

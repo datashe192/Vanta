@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Vanta</title>
 <style>
-/* ===== CSS ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -57,11 +56,18 @@ body {
 .code-box {
   background: #111;
   border: 1px solid #00ff9d;
+  border-radius: 12px;
   padding: 10px;
-  margin: 10px 0;
+  margin: 15px 0;
   position: relative;
   font-family: monospace;
   white-space: pre-wrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ff9d55;
+}
+
+.code-box:hover {
+  box-shadow: 0 0 20px #00ff9daa;
 }
 
 .copy-btn {
@@ -77,6 +83,8 @@ body {
   display: flex;
   align-items: center;
   gap: 4px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
 .copy-btn.copied {
@@ -92,6 +100,12 @@ body {
   margin: 10px 0;
 }
 .locked::before { content: '🔒'; }
+
+.caption {
+  margin-top: 8px;
+  font-style: italic;
+  color: #55ff99;
+}
 </style>
 </head>
 <body>
@@ -100,16 +114,22 @@ body {
   <button class="active" data-tab="install">Installation</button>
   <button data-tab="setup">Setup</button>
   <button data-tab="variables">Variables</button>
+  <button onclick="window.location.href='index.html'">Back to Home</button>
 </div>
 
 <div class="main-content">
   <!-- Installation Tab -->
   <div id="install" class="tab-content active">
     <h2>Installing Vanta</h2>
+    <div class="caption">1. Self-install</div>
     <div class="code-box">Vanta self-install</div>
+    <div class="caption">If it doesn't work try this:</div>
     <div class="code-box">./vanta.exe self-install</div>
+    <div class="caption">2. Implementing Vanta</div>
     <div class="code-box">Vanta init</div>
+    <div class="caption">If it doesn't work then try this:</div>
     <div class="code-box">./Vanta.exe init</div>
+    <div class="caption">If all above don't work try this:</div>
     <div class="code-box">cd path\to\vanta</div>
   </div>
 
@@ -139,10 +159,8 @@ print(a, b)
 </div>
 
 <script>
-// ===== JS =====
-
 // Tab switching
-const buttons = document.querySelectorAll('.sidebar button');
+const buttons = document.querySelectorAll('.sidebar button[data-tab]');
 const tabs = document.querySelectorAll('.tab-content');
 
 buttons.forEach(btn => {

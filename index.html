@@ -16,22 +16,27 @@
       height: 100vh;
       padding-left: 8%;
       text-align: left;
+      overflow-x: hidden;
     }
+
     .container {
       max-width: 600px;
       animation: fadeIn 1.2s ease;
     }
+
     h1 {
       font-size: 3rem;
       margin-bottom: 15px;
       letter-spacing: 2px;
     }
+
     p {
       font-size: 1.2rem;
       margin-bottom: 25px;
       color: #d0d0d0;
       line-height: 1.5;
     }
+
     button {
       padding: 12px 28px;
       font-size: 1rem;
@@ -42,23 +47,62 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
+
     button:hover {
       background: #7b68ee;
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Custom top progress bar */
+    #custom-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background-color: #00ff9d; /* same green as your code boxes */
+      z-index: 9999;
+      transition: width 0.3s ease;
+      display: none;
+    }
   </style>
 </head>
 <body>
+  <!-- Top loader -->
+  <div id="custom-loader"></div>
+
+  <!-- Main content -->
   <div class="container">
     <h1>Vanta</h1>
-    <p>Vanta is a Programming language implemented in Python.  
+    <p>Vanta is a Programming language implemented in Python.<br>
        It supports variables, printing, and more will be added soon.</p>
     <button onclick="location.href='about.html'">Learn About</button>
   </div>
+
+  <script>
+    // Initialize history state so popstate triggers
+    history.pushState(null, document.title, location.href);
+
+    // Detect browser back button
+    window.addEventListener('popstate', function(event) {
+      const loader = document.getElementById('custom-loader');
+      loader.style.width = '0%';
+      loader.style.display = 'block';
+
+      // Animate loader to 100%
+      setTimeout(() => { loader.style.width = '100%'; }, 50);
+
+      // Delay actual navigation so loader is visible
+      setTimeout(() => {
+        history.back();
+      }, 1000); // 1 second simulated load
+    });
+  </script>
 </body>
 </html>

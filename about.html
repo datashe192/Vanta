@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Vanta</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #111;
+      color: #eee;
+    }
+    .sidebar {
+      width: 220px;
+      background: #1a1a1a;
+      padding: 20px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .sidebar button {
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.1rem;
+      text-align: left;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .sidebar button:hover, .sidebar button.active {
+      background: #2b72ff;
+      color: #fff;
+    }
+    .content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #2b72ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .download-btn:hover {
+      background: #1a4ed8;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <button class="tab active" data-tab="why">Why?</button>
+    <button class="tab" data-tab="installation">Installation</button>
+    <button class="tab" data-tab="setup">Setup</button>
+  </div>
+
+  <div class="content" id="tab-content">
+    <h2>Why?</h2>
+    <p>Vanta was built to simplify LuaU coding by providing smoother variable handling, fewer errors, and 
+       a simpler syntax for developers.</p>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const content = document.getElementById("tab-content");
+
+    const pages = {
+      "why": `
+        <h2>Why?</h2>
+        <p>Vanta was built to simplify LuaU coding by providing smoother variable handling, fewer errors, and 
+        a simpler syntax for developers.</p>
+      `,
+      "installation": `
+        <h2>Installation</h2>
+        <p>Download the Vanta library here:</p>
+        <a class="download-btn" href="your-file.zip" download>Download Vanta</a>
+      `,
+      "setup": `
+        <h2>Setup</h2>
+        <p><strong>Error:231</strong> - Vanta is not currently public. Please come back later.</p>
+      `
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        content.innerHTML = pages[tab.dataset.tab];
+      });
+    });
+  </script>
+</body>
+</html>

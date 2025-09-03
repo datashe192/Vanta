@@ -28,9 +28,9 @@
       background: none;
       border: none;
       color: #ccc;
-      font-size: 1.1rem;
+      font-size: 1rem;
       text-align: left;
-      padding: 10px;
+      padding: 8px;
       cursor: pointer;
       border-radius: 6px;
       transition: all 0.3s ease;
@@ -41,15 +41,19 @@
     }
     .content {
       flex: 1;
-      padding: 30px;
+      padding: 25px;
       overflow-y: auto;
       animation: fadeIn 0.3s ease;
       line-height: 1.6;
     }
     h2 { margin-top: 0; }
+
+    /* custom download icon */
     .download-btn {
-      display: inline-block;
-      padding: 10px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
       background: #2b72ff;
       color: white;
       border: none;
@@ -57,9 +61,31 @@
       cursor: pointer;
       text-decoration: none;
       transition: 0.3s;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+    }
+    .download-btn::before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid white; /* arrow */
+      position: relative;
+      top: -2px;
+    }
+    .download-btn::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 2px;
+      background: white;
+      margin-left: -10px;
+      position: relative;
+      top: 4px;
     }
     .download-btn:hover { background: #1a4ed8; }
+
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(10px);}
       to {opacity: 1; transform: translateY(0);}
@@ -71,8 +97,8 @@
       position: absolute;
       top: 15px;
       left: 15px;
-      width: 30px;
-      height: 22px;
+      width: 28px;
+      height: 20px;
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
@@ -80,7 +106,7 @@
     }
     .hamburger span {
       display: block;
-      height: 4px;
+      height: 3px;
       background: #fff;
       border-radius: 2px;
     }
@@ -92,24 +118,15 @@
         height: 100%;
         transform: translateX(-100%);
       }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-      .hamburger {
-        display: flex;
-      }
-      .content {
-        font-size: 0.9rem;
-        padding: 20px;
-      }
+      .sidebar.open { transform: translateX(0); }
+      .hamburger { display: flex; }
+      .content { font-size: 0.9rem; padding: 18px; }
     }
   </style>
 </head>
 <body>
   <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 
   <div class="sidebar" id="sidebar">
@@ -155,7 +172,7 @@
       "installation": `
         <h2>Installation</h2>
         <p>Download the Vanta library below and insert it into your Roblox Studio project.</p>
-        <a class="download-btn" href="Vanta.rbxm" download>⬇️ Download Vanta.rbxm</a>
+        <a class="download-btn" href="Vanta.rbxm" download>Download Vanta.rbxm</a>
       `,
       "setup": `
         <h2>Setup</h2>
@@ -170,7 +187,7 @@
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         content.innerHTML = pages[tab.dataset.tab];
-        sidebar.classList.remove("open"); // close sidebar after click (mobile)
+        sidebar.classList.remove("open");
       });
     });
 

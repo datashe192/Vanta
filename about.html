@@ -30,14 +30,16 @@
 .sidebar {
   width: 220px;
   background: #1a1a1a;
-  padding: 60px 20px 20px; /* ⬅️ increased top padding so buttons move down */
+  padding: 20px;
   box-shadow: 2px 0 8px rgba(0,0,0,0.3);
   display: flex;
   flex-direction: column;
   gap: 15px;
   transition: transform 0.3s ease;
 }
-    .sidebar button {
+
+.sidebar button:first-child {
+  margin-top: 40px; /* ✅ moves the whole stack of buttons down */
       background: none;
       border: none;
       color: #ccc;

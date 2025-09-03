@@ -49,7 +49,7 @@
     h2 { margin-top: 0; }
     .download-btn {
       display: inline-block;
-      padding: 12px 20px;
+      padding: 10px 18px;
       background: #2b72ff;
       color: white;
       border: none;
@@ -57,6 +57,7 @@
       cursor: pointer;
       text-decoration: none;
       transition: 0.3s;
+      font-size: 0.95rem;
     }
     .download-btn:hover { background: #1a4ed8; }
     @keyframes fadeIn {
@@ -153,17 +154,14 @@
       `,
       "installation": `
         <h2>Installation</h2>
-        <p>Download the Vanta library here:</p>
-        <a class="download-btn" href="your-file.zip" download>Download Vanta</a>
+        <p>Download the Vanta library below and insert it into your Roblox Studio project.</p>
+        <a class="download-btn" href="Vanta.rbxm" download>⬇️ Download Vanta.rbxm</a>
       `,
       "setup": `
         <h2>Setup</h2>
-        <p>To start using Vanta, follow these steps:</p>
-        <ol>
-          <li>Put <strong>Vanta</strong> inside <code>ReplicatedStorage</code>.</li>
-          <li>Make your custom functions inside the main module.</li>
-          <li>Store your variables inside servers for safe and reliable use.</li>
-        </ol>
+        <p>Put Vanta in <strong>ReplicatedStorage</strong>.</p>
+        <p>Make custom functions in the main module.</p>
+        <p>Store variables in servers.</p>
       `
     };
 
@@ -172,7 +170,7 @@
         tabs.forEach(t => t.classList.remove("active"));
         tab.classList.add("active");
         content.innerHTML = pages[tab.dataset.tab];
-        if (window.innerWidth <= 768) sidebar.classList.remove("open");
+        sidebar.classList.remove("open"); // close sidebar after click (mobile)
       });
     });
 
